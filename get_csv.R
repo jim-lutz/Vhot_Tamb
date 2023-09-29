@@ -38,17 +38,34 @@ for(csv_fn in l_csv) {
                      variable.factor = FALSE,
                      value.name      = "Vhot")
   
-  # set key
-  # sort by x, the unrounded decimal month from digitzing
-  data.table::setkey(dt_csv, x)
-  
-  str(dt_csv)
-
   # add to dt_Vhot
   dt_Vhot <- data.table::rbindlist(list(dt_Vhot,dt_csv))
   
 }
 
+# now read high-density-houses.csv for more data
+dt_csv <- data.table::as.data.table(readr::read_csv("./high-density-houses.csv")) 
+
+# integer months
+dt_csv[, month:=round(x)] 
+
+# set dwelling
+dt_csv[, dwelling := "high-density-houses"]
+
+# set dwelling name
+data.table::setnames(dt_csv,
+                     old = c("high-density-houses"),
+                     new = c("Vhot"))
+
+
+# add to dt_Vhot
+dt_Vhot <- data.table::rbindlist(list(dt_Vhot,dt_csv), use.names=TRUE )
+
+# set key
+# sort by x, the unrounded decimal month from digitzing
+data.table::setkey(dt_Vhot, x)
+
+str(dt_Vhot)
 
 # save data.table to .Rdata file
 save(dt_Vhot, file = paste0(data_path, "dt_Vhot.Rdata" ))

@@ -65,6 +65,7 @@
     and .gitignore
     
     looks like should read in  each csv then transform to long
+
     want the data.table elements to be:
         month  # starts out as x, needs to be rounded to nearest integer
         dwelling    # high-density-townhouses,low-density-townhouses,medium-density-townhouses, etc
@@ -73,7 +74,10 @@
         Vhot  # l/p-d, these are the values in the fields
         
 
-        
+    made dt_Vhot        
+    
+    next is to add Tamb from Johannesburg
+    
                 
     
     
