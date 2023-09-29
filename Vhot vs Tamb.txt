@@ -1,0 +1,84 @@
+2023-09-28
+    recover software to digitize Meyer paper graphs
+    looking for L/p-d by month for houses, townhouses and apartments
+    
+    Meyer, J. P., and M. Tshimankinda. “Domestic Hot Water Consumption in South African Houses for Developed and Developing Communities.” International Journal of Energy Research 21, no. 7 (June 10, 1997): 667–73. https://doi.org/10.1002/(SICI)1099-114X(19970610)21:7<667::AID-ER286>3.0.CO;2-2.
+    
+    Figure 1. Hot water consumptions per person per day at a temperature of 65°C for low-, medium- and high-density houses
+    
+    Meyer, J.P., and M. Tshimankinda. “Domestic Hot Water Consumption in South African Townhouses.” Energy Conversion and Management 39, no. 7 (May 1998): 679–84. https://doi.org/10.1016/S0196-8904(97)00048-4.
+    
+    Meyer, J.P, and M Tshimankinda. “Domestic Hot-Water Consumption in South African Apartments.” Energy 23, no. 1 (January 1998): 61–66. https://doi.org/10.1016/S0360-5442(97)00069-8.
+
+    see get_townhouse.sh to extract high density tiff files
+
+    for digitizing
+    https://github.com/markummitchell/engauge-digitizer
+    
+    there's a flatpak
+
+    https://flathub.org/apps/io.github.markummitchell.Engauge_Digitizer
+    
+2023-09-29
+    copy get_townhouse.sh and modify to get_houses.sh and get_apartments.sh
+    that worked
+    
+    redo get_apartments.sh fix file name
+    
+    enguage help see
+    https://digitizer.sourceforge.net/usermanual/index.html
+    
+    may help enguage if image is only the grid, not numbers or labels
+    no that didn't work
+    
+    did point fitting
+    see apartments.csv  high-density-houses.csv  houses.csv  townhouses.csv
+    
+    have 9 curves to fit
+    probably best to use R for consistency
+    
+    the *.csv files sometimes have multiple x values, and multiple y values as well
+    not sure I can tell which ones were the ones I selected, and which were extrapolated by engauge
+    maybe add in high-density-houses.csv to the houses.csv
+    
+    need to put the Johannesburg Tamb data in a csv as well
+    
+    then plot each of the 9 curves {apartements, townhouses, houses} X { low-density, medium-density, high-density}
+    of Vhot vs Tamb
+    
+    do a linear fit for each
+    then maybe look at the multiple points,
+    
+    start a git/Rproj here
+    see 15 New project, GitHub first
+    15.2.2 RStudio IDE
+    https://happygitwithr.com/new-github-first#rstudio-ide
+    In RStudio, start a new Project:    
+    
+    had to move Vhot_Tamb to Vhot_Tamb.tmp
+    to make Vhot_Tamb a git project directory
+    don't move the existing data and graphics shells to avoid breaking current scripts
+    
+    copy startup.R from /home/jiml/HotWaterResearch/projects/2023 SA WH/SA_WH_geyser_standby_loss
+    for easy consistent startup
+    
+    and .gitignore
+    
+    looks like should read in  each csv then transform to long
+    want the data.table elements to be:
+        month  # starts out as x, needs to be rounded to nearest integer
+        dwelling    # high-density-townhouses,low-density-townhouses,medium-density-townhouses, etc
+                    is the columns names in the csv files
+        X       # decimal month of year from digitizing
+        Vhot  # l/p-d, these are the values in the fields
+        
+
+        
+                
+    
+    
+    
+    
+    
+    
+    
